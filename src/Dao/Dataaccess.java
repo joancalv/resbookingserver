@@ -14,6 +14,8 @@ import java.sql.SQLException;
  *
  * @author joan
  */
+
+//metode que insereix un usuari
 public class Dataaccess extends Pgconnection{
     Connection con;
     public void createUser(Users user) throws SQLException{
