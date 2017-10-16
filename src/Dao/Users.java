@@ -11,23 +11,13 @@ package Dao;
  */
 public class Users {
     
-  int userId;
   String name;
   String username;
   String password;
     
-   public Users(int userId, String name){
-     this.userId=userId;
+   public Users(String username, String name){
+     this.username=username;   
      this.name=name;
-}
-   
-   
-     public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getName() {

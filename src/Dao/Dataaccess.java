@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 /**
  *
@@ -20,6 +21,7 @@ import java.sql.Statement;
 //metode que insereix un usuari
 public class Dataaccess extends Pgconnection{
     Connection con;
+    List<Users> userList;
     public boolean createUser(Users user) throws SQLException{
         if(checkUser(user)){
             insertUser(user);
@@ -34,9 +36,9 @@ public class Dataaccess extends Pgconnection{
         String sql="insert into ﻿users (name,username,password) VALUES(?,?,?)";
         try{
         PreparedStatement stmt=con.prepareStatement(sql);
-        stmt.setString(2, user.getName());
-        stmt.setString(3, user.getUsername());
-        stmt.setString(4, user.getPassword());
+        stmt.setString(1, user.getName());
+        stmt.setString(2, user.getUsername());
+        stmt.setString(3, user.getPassword());
         stmt.execute();
         }catch(Exception ex){
             
@@ -51,9 +53,9 @@ public class Dataaccess extends Pgconnection{
                 String sql="update users set name=?,password=? where username="+"user.getUsername()";
         try{
         PreparedStatement stmt=con.prepareStatement(sql);
-        stmt.setString(2, user.getName());
-        stmt.setString(3, user.getUsername());
-        stmt.setString(4, user.getPassword());
+        stmt.setString(1, user.getName());
+        stmt.setString(2, user.getUsername());
+        stmt.setString(3, user.getPassword());
         stmt.executeUpdate();
        
         }catch(Exception ex){
@@ -92,9 +94,6 @@ public class Dataaccess extends Pgconnection{
             try{
         Statement stat=con.createStatement();
         ResultSet rs=stat.executeQuery(query);
-        if(rs.first()){
-           return true;
-        }
                 
         }catch (Exception ex){
                     
@@ -128,6 +127,25 @@ public class Dataaccess extends Pgconnection{
         return false;
     }
     
+    public boolean checkPass(Users user){
+       String query="select password from users where username="+"user.getUsername()";
+        
+        try{
+        Statement stat=con.createStatement();
+        ResultSet rs=stat.executeQuery(query);
+        if(rs.getString(1).matches(user.getPassword())){
+           return true;
+        }
+                
+        }catch (Exception ex){
+                    
+                    
+         }        
+        
+        return false;
+        
+    }
+    
     public int getId(){
         int id=-1;
         try{
@@ -157,5 +175,30 @@ public class Dataaccess extends Pgconnection{
                 }   
         
         return user_id;
+    }
+    
+    public List<Users> userList(){
+        String query="select name,username from users";
+        String name, username,password;
+        
+        try{
+        Statement stat=con.createStatement();
+        ResultSet rs=stat.executeQuery(query);
+        while(rs.next()){
+            name=rs.getString(1);
+            username=rs.getString(2);
+            password=rs.getString(3);
+            Users u=new Users(name,username);
+            u.setPassword(password);
+            userList.add(u);
+                        
+        }
+                                
+        }catch (Exception ex){
+                    
+                    
+         }        
+        
+        return userList;
     }
 }
