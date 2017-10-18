@@ -18,10 +18,10 @@ public class Controller {
     List<Users> users=new ArrayList<Users>();
     
 //Comrpovem que pot fer login, primer comprovem si el usuari existeix, i despres comprovem la contrasenya    
-    public boolean login(Users user){
+    public boolean login(Users user) throws SQLException{
         acces=new Dataaccess();
         if(acces.checkUser(user)){
-            if(acces.checkPass(user)){
+                if(acces.checkPass(user)){
                 return true;
             }
         }
@@ -31,8 +31,7 @@ public class Controller {
     //Comprovem que no existeix a la base dades, sino existeix el creem
     public boolean newUser(Users user) throws SQLException{
         acces=new Dataaccess();
-        if(!acces.checkUser(user)){
-            acces.createUser(user);
+        if(acces.insertUser(user)){
             return true;
         }else{
             return false;
@@ -41,8 +40,7 @@ public class Controller {
     //Comprovem que esta el usuari, i el modifiquem.
         public boolean modifyUser(Users user) throws SQLException{
         acces=new Dataaccess();
-        if(!acces.checkUser(user)){
-            acces.modifyUser(user);
+        if(acces.modifyUser(user)){
             return true;
         }else{
             return false;
@@ -60,7 +58,7 @@ public class Controller {
         }
     }   
         
-     public List<Users>  listUser(){
+     public List<Users> listUser(){
          acces=new Dataaccess();
          users.addAll(acces.userList());
          return users;

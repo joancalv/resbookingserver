@@ -15,9 +15,9 @@ public class Users {
   String username;
   String password;
     
-   public Users(String username, String name){
-     this.username=username;   
+   public Users(String name, String username){
      this.name=name;
+     this.username=username;   
     }
 
     public String getName() {
