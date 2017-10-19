@@ -57,7 +57,7 @@ public class RebreDades extends Thread{
                 ObjectOutputStream out=new ObjectOutputStream (client.getOutputStream());
                 
                 switch(numOperacio){
-                    case 1://Obtenir Usuari
+                    case 1://Usuari potConectar-se
                         Boolean isLog=c.login(paquetDades.getUsuaris());  
                         paquetResposta=new PaquetDades(1, isLog);
                         out.writeObject(paquetResposta);
