@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 /**
- *
+ * Aquesta clase estableix una connexió amb una base de dades PostGresSQL
  * @author joan
  */
 public class Pgconnection {
@@ -23,7 +23,6 @@ public class Pgconnection {
             try {
                 Class.forName("org.postgresql.Driver");
                 conn = DriverManager.getConnection(urlDatabase,user,password);
-                System.out.println("Connection was succefully established=) ");
             } catch (Exception e) {
                 System.out.println("Error : "+e.getMessage());
             }

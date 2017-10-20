@@ -6,7 +6,7 @@
 package Model;
 
 /**
- *
+ * Es la clase on definim el usuari amb el seu constructor
  * @author joan
  */
 public class User {
@@ -17,18 +17,21 @@ public class User {
   int role;
   int state;
 
-    public int getState() {
+  
+   public User(String name, String username, String password, int role, int state){
+     this.name=name;
+     this.username=username;   
+     this.password=password;
+     this.role=role;
+     this.state=role;
+    }
+   
+     public int getState() {
         return state;
     }
 
     public void setState(int state) {
         this.state = state;
-    }
-   public User(String name, String username, String password, int role){
-     this.name=name;
-     this.username=username;   
-     this.password=password;
-     this.role=role;
     }
 
     public int getRole() {

@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Aquesta clase s'encarrega de cridar el métdoes que manipulen directamente la base de dades.
+ * Si ha pogut efectuar la operació retorn verdader sino fals.
  * @author joan
  */
 public class Controller {
@@ -58,7 +59,7 @@ public class Controller {
         }
     }   
         
-     public List<User> listUser(){
+     public List<User> listUser() throws SQLException{
          acces=new Dataaccess();
          users.addAll(acces.userList());
          return users;
